@@ -1,16 +1,17 @@
 # テーブル設計
 
 ## users テーブル
-| Column            | Type         | Options        |
-| ----------------- | ------------ | -------------- |
-| nickname          | string       | null: false    |
-| email             | string       | null: false    |
-| password          | string       | null: false    |
-| first_name        | string       | null: false    |
-| family_name       | string       | null: false    |
-| first_name_kana   | string       | null: false    |
-| family_name_kana  | string       | null: false    |
-| birthday          | integer      | null: false    |
+| Column             | Type         | Options                   |
+| ------------------ | ------------ | ------------------------- |
+| nickname           | string       | null: false               |
+| email              | string       | null: false unique:true   |
+| password           | string       | null: false               |
+| encrypted_password | string       | null: false               |
+| first_name         | string       | null: false               |
+| family_name        | string       | null: false               |
+| first_name_kana    | string       | null: false               |
+| family_name_kana   | string       | null: false               |
+| birthday           | date         | null: false               |
 
 ### Association
 - has_many :purchases
@@ -20,14 +21,13 @@
 ## items　テーブル
 | Column           | Type          | Options                                     |
 | ---------------- | ------------- | ------------------------------------------- |
-| image            | integer       | (ActiveStorage) null:false                  |
-| item_name        | text          | null: false                                 |
+| item_name        | string        | null: false                                 |
 | description      | text          | null: false                                 |
-| category         | integer       | (ActiveHash) null:false  foreign_key: true  |
-| status           | integer       | (ActiveHash) null:false  foreign_key: true  |
-| shipping         | integer       | (ActiveHash) null:false  foreign_key: true  |
-| prefecture       | integer       | (ActiveHash) null:false  foreign_key: true  |
-| shipping_days    | integer       | (ActiveHash) null:false  foreign_key: true  |
+| category_id      | integer       | (ActiveHash) null:false                     |
+| status_id        | integer       | (ActiveHash) null:false                     |
+| shipping_id      | integer       | (ActiveHash) null:false                     |
+| prefecture_id    | integer       | (ActiveHash) null:false                     |
+| shipping_day_id  | integer       | (ActiveHash) null:false                     |
 | prise            | integer       | null: false                                 |
 | user             | references    | null: false, foreign_key: true              |
 
@@ -40,8 +40,8 @@
 | Column       | Type         | Options                         |
 | ------------ | ------------ | ------------------------------- |
 | text         | text         | null: false                     |
-| user         | refences     | null: false, foreign_key: true  |
-| item         | refences     | null: false, foreign_key: true  |
+| user         | references   | null: false, foreign_key: true  |
+| item         | references   | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
@@ -50,8 +50,8 @@
 ## purchases　テーブル
 | Column       | Type         | Options                         |
 | ------------ | ------------ | ------------------------------- |
-| user         | refences     | null: false, foreign_key: true  |
-| item         | refences     | null: false, foreign_key: true  |
+| user         | references   | null: false, foreign_key: true  |
+| item         | references   | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
@@ -61,11 +61,11 @@
 ## addresses　テーブル
 | Column           | Type          | Options                                     |
 | ---------------- | ------------- | ------------------------------------------- |
-| post_num         | integer       | null: false                                 |
-| prefectures      | integer       | (ActiveHash) null:false  foreign_key: true  |
+| post_num         | string        | null: false                                 |
+| prefecture_id    | integer       | (ActiveHash) null:false                     |
 | city             | string        | null: false                                 |
 | address          | string        | null: false                                 |
-| bulding_name     | string        |                                             |
+| building_name    | string        |                                             |
 | phone_num        | string        | null:false                                  |
 | purchase         | references    | null: false, foreign_key: true              |
 
