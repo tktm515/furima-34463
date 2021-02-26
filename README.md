@@ -5,7 +5,6 @@
 | ------------------ | ------------ | ------------------------- |
 | nickname           | string       | null: false               |
 | email              | string       | null: false unique:true   |
-| password           | string       | null: false               |
 | encrypted_password | string       | null: false               |
 | first_name         | string       | null: false               |
 | family_name        | string       | null: false               |
@@ -56,7 +55,7 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one    :addresses
+- has_one    :address
 
 ## addresses　テーブル
 | Column           | Type          | Options                                     |
@@ -70,4 +69,4 @@
 | purchase         | references    | null: false, foreign_key: true              |
 
 ### Association
-- belongs_to :purchases
+- belongs_to :purchase
