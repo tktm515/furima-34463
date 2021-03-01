@@ -129,6 +129,12 @@ require 'rails_helper'
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name kana 全角カナ文字を使用してください")
       end
+
+      it 'emailに@がないと登録できないこと' do
+        @user.email = 'aaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
     end
   end
 end
