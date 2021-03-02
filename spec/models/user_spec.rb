@@ -1,13 +1,12 @@
 require 'rails_helper'
- RSpec.describe User, type: :model do
-
+RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
 
-  describe "ユーザー新規登録" do
+  describe 'ユーザー新規登録' do
     context '新規登録できる時' do
-      it "nicknameとemail、passwordとpassword_confirmation,first_nameとfamily_name,first_name_kanaとfamily_name_kana,birthdayがあれば登録できる" do
+      it 'nicknameとemail、passwordとpassword_confirmation,first_nameとfamily_name,first_name_kanaとfamily_name_kana,birthdayがあれば登録できる' do
         expect(@user).to be_valid
       end
 
@@ -16,10 +15,9 @@ require 'rails_helper'
         @user.password_confirmation = 'ttt000'
         expect(@user).to be_valid
       end
-
     end
 
-    context "ユーザー登録できない時" do
+    context 'ユーザー登録できない時' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -79,26 +77,26 @@ require 'rails_helper'
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
 
       it 'passwordが5文字以下では登録できない' do
         @user.password = '00000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
       it 'passwordは英語のみでは登録できないこと' do
         @user.password = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordは数字のみでは登録できないこと' do
         @user.password = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
-      end   
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
 
       it 'passwordは全角では登録できないこと' do
         @user.password = 'TTT000'
@@ -109,31 +107,31 @@ require 'rails_helper'
       it 'family_nameは漢字・平仮名・カタカナ以外では登録できないこと' do
         @user.family_name = '//////'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('Family name 全角文字を使用してください')
       end
 
       it 'first_nameは漢字・平仮名・カタカナ以外では登録できないこと' do
         @user.first_name = '//////'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name 全角文字を使用してください')
       end
 
       it 'first_name_kanaは全角カタカナ以外では登録できないこと' do
         @user.first_name_kana = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana 全角カナ文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name kana 全角カナ文字を使用してください')
       end
 
       it 'family_nameは全角カタカナ以外では登録できないこと' do
         @user.family_name_kana = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana 全角カナ文字を使用してください")
+        expect(@user.errors.full_messages).to include('Family name kana 全角カナ文字を使用してください')
       end
 
       it 'emailに@がないと登録できないこと' do
         @user.email = 'aaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
     end
   end
