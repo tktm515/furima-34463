@@ -17,9 +17,11 @@ class Item < ApplicationRecord
     validates :prefecture_id
   end
 
-  validates :item_name,     presence: true
-  validates :description,   presence: true
-  validates :image,         presence: true
+  with_options presence: true do
+    validates :item_name     
+    validates :description   
+    validates :image
+  end         
   
   VALID_PRICEL_HALF = /\A[0-9]+\z/
   validates  :price,  presence: true, format: {with: VALID_PRICEL_HALF}, numericality: { only_integer: true,
