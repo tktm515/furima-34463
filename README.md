@@ -27,7 +27,7 @@
 | shipping_id      | integer       | (ActiveHash) null:false                     |
 | prefecture_id    | integer       | (ActiveHash) null:false                     |
 | shipping_day_id  | integer       | (ActiveHash) null:false                     |
-| prise            | integer       | null: false                                 |
+| price            | integer       | null: false                                 |
 | user             | references    | null: false, foreign_key: true              |
 
 ### Association
