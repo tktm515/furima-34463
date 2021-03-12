@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_num, :city, :address, :purchase_id, :bulding_name, :phone_num, :prefecture_id, :token
+  attr_accessor :user_id, :item_id, :post_num, :city, :address, :bulding_name, :phone_num, :prefecture_id, :token
   
 
   with_options presence: true do
@@ -9,7 +9,7 @@ class PurchaseAddress
     validates :city
     validates :address
     validates :post_num, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
-    validates :phone_num, format: { with: /\A\d{10,11}\z/ }, numericality: { only_integer: true }
+    validates :phone_num, format: { with: /\A\d{10,11}\z/ }
     validates :token
   end
 
